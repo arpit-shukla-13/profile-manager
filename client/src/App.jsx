@@ -22,7 +22,16 @@ function App() {
   // Dark Mode State
   const [darkMode, setDarkMode] = useState(false)
   
-  const API_URL = "http://localhost:5000";
+   const API_URL = window.location.hostname === "localhost" 
+    ? "http://localhost:5000" 
+    : "https://profile-manager-x3bm.onrender.com";
+
+  useEffect(() => {
+    if (token) {
+      fetchUserDashboard()
+      setView('dashboard')
+    }
+  }, [token])
 
   // Token check when app loads
   useEffect(() => {
